@@ -4,13 +4,13 @@ libs = []
 
 $defs << "-DRUBY_VERSION_CODE=#{RUBY_VERSION.gsub(/\D/, '')}"
 
-if have_func('rb_thread_blocking_region')
-  $defs << '-DHAVE_RB_THREAD_BLOCKING_REGION'
-end
+#if have_func('rb_thread_blocking_region')
+#  $defs << '-DHAVE_RB_THREAD_BLOCKING_REGION'
+#end
 
-if have_func('rb_thread_alone')
-  $defs << '-DHAVE_RB_THREAD_ALONE'
-end
+#if have_func('rb_thread_alone')
+#  $defs << '-DHAVE_RB_THREAD_ALONE'
+#end
 
 if have_func('rb_str_set_len')
   $defs << '-DHAVE_RB_STR_SET_LEN'
