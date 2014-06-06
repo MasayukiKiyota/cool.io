@@ -1,8 +1,7 @@
 Cool.io
 =======
 
-### NOTE: cool.io is in maintenance mode only and is not being actively developed
-### Please check out [Celluloid::IO](http://github.com/celluloid/celluloid-io) instead!
+### If you are interested in Celluloid based IO framework, please check out [Celluloid::IO](http://github.com/celluloid/celluloid-io)
 
 Cool.io is an event library for Ruby, built on the libev event library which 
 provides a cross-platform interface to high performance system calls .  This 
@@ -15,10 +14,8 @@ applications.
 
 You can include Cool.io in your programs with:
 
-	require 'rubygems'
 	require 'cool.io'
 
-Questions? Sign up for the mailing list by emailing: [cool.io@librelist.com](mailto:cool.io@librelist.com)
 
 Anatomy
 -------
@@ -89,15 +86,11 @@ core socket classes are also provided.  Among these are:
   Cool.io::TCPSocket (or any subclass you wish to provide) whenever an incoming
   connection is received.
 
-* Cool.io::HttpClient - An HTTP/1.1 client with support for chunked encoding
-  and streaming response processing through asynchronous callbacks.
-
 Example Program
 ---------------
 
 Cool.io provides a Sinatra-like DSL for authoring event-driven programs:
 
-    require 'rubygems'
     require 'cool.io'
 
     ADDR = '127.0.0.1'

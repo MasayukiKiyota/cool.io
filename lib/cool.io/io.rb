@@ -31,25 +31,45 @@ module Coolio
     #
 
     # Attach to the event loop
-    def attach(loop); @_read_watcher.attach loop; schedule_write if !@_write_buffer.empty?; self; end
+    def attach(loop)
+      @_read_watcher.attach(loop)
+      schedule_write if !@_write_buffer.empty?
+      self
+    end
 
     # Detach from the event loop
-    def detach; @_read_watcher.detach; self; end # TODO should these detect write buffers, as well?
+    def detach
+      # TODO should these detect write buffers, as well?
+      @_read_watcher.detach
+      self
+    end
 
     # Enable the watcher
-    def enable; @_read_watcher.enable; self; end
+    def enable
+      @_read_watcher.enable
+      self
+    end
 
     # Disable the watcher
-    def disable; @_read_watcher.disable; self; end
+    def disable
+      @_read_watcher.disable
+      self
+    end
 
     # Is the watcher attached?
-    def attached?; @_read_watcher.attached?; end
+    def attached?
+      @_read_watcher.attached?
+    end
 
     # Is the watcher enabled?
-    def enabled?; @_read_watcher.enabled?; end
+    def enabled?
+      @_read_watcher.enabled?
+    end
 
     # Obtain the event loop associated with this object
-    def evloop; @_read_watcher.evloop; end
+    def evloop
+      @_read_watcher.evloop
+    end
 
     #
     # Callbacks for asynchronous events
@@ -136,7 +156,7 @@ module Coolio
     # Schedule a write to be performed when the IO object becomes writable
     def schedule_write
       return unless @_io # this would mean 'we are still pre DNS here'
-      return unless attached? # this would mean 'currently unattached' -- ie still pre DNS, or just plain not attached, which is ok
+      return unless @_read_watcher.attached? # this would mean 'currently unattached' -- ie still pre DNS, or just plain not attached, which is ok
       begin
         enable_write_watcher
       rescue IOError
@@ -167,8 +187,13 @@ module Coolio
       end
 
       # Configure IOWatcher event callbacks to call the method passed to #initialize
-      def on_readable; @coolio_io.__send__(:on_readable); end
-      def on_writable; @coolio_io.__send__(:on_writable); end
+      def on_readable
+        @coolio_io.__send__(:on_readable)
+      end
+
+      def on_writable
+        @coolio_io.__send__(:on_writable)
+      end
     end
   end
 end

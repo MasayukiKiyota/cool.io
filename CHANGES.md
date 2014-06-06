@@ -1,3 +1,27 @@
+1.2.4
+-----
+
+* Fix a bug that #close for unconnected Socket doesn't detach all watchers (#33)
+* Remove 1.8 support code
+* Use standard library instead of own hosts list (#34)
+
+1.2.3
+-----
+
+* Fix CPU consuming issue on Windows.
+
+1.2.2
+-----
+
+* Add timeout option to Loop#run and Loop#run_once. Default by nil
+* Support Ruby 2.2.0
+
+1.2.1
+-----
+
+* Release the GIL when libev polls (#24)
+* Add Listener#listen method to change backlog size
+
 1.2.0
 -----
 

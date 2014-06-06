@@ -15,17 +15,9 @@ end
 
 module Coolio
   class Loop
-    # In Ruby 1.9 we want a Coolio::Loop per thread, but Ruby 1.8 is unithreaded
-    if RUBY_VERSION >= "1.9.0"
-      # Retrieve the default event loop for the current thread
-      def self.default
-        Thread.current._coolio_loop
-      end
-    else
-      # Retrieve the default event loop
-      def self.default
-        @@_coolio_loop ||= Coolio::Loop.new
-      end
+    # Retrieve the default event loop for the current thread
+    def self.default
+      Thread.current._coolio_loop
     end
 
     # Create a new Coolio::Loop
@@ -88,12 +80,12 @@ module Coolio
     # event callbacks to watchers until all watchers associated with
     # the loop have been disabled or detached.  The loop may be
     # explicitly stopped by calling the stop method on the loop object.
-    def run
+    def run(timeout = nil)
       raise RuntimeError, "no watchers for this loop" if @watchers.empty?
 
       @running = true
       while @running and not @active_watchers.zero?
-        run_once
+        run_once(timeout)
       end
       @running = false
     end

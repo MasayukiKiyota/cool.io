@@ -1,5 +1,7 @@
 module Coolio
-  VERSION = "1.2.0"
+  VERSION = "1.2.4"
   
-  def self.version; VERSION; end
+  def self.version
+    VERSION
+  end
 end
